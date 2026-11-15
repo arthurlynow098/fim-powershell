@@ -1,6 +1,6 @@
 <a id="top"></a>
 
-<p align="center"><img src="assets/banner.png" alt="FIM PowerShell" width="100%"></p>
+<p align="center"><img src="assets/banner.svg" alt="FIM PowerShell" width="100%"></p>
 
 <p align="center">
 <img alt="PowerShell" src="https://img.shields.io/badge/PowerShell-5.1%20e%207-3B82F6?style=for-the-badge&logo=powershell&logoColor=white">
@@ -13,7 +13,7 @@
 
 <a id="sobre"></a>
 
-<p><img src="assets/secao-01.png" alt="Sobre o projeto" width="100%"></p>
+<p><img src="assets/secao-01.svg" alt="Sobre o projeto" width="100%"></p>
 
 File Integrity Monitoring (FIM) é uma das primeiras coisas que aparecem quando você estuda SOC. A pergunta é simples, **algum arquivo importante mudou sem ninguém autorizar?** Um `web.config` alterado, um `.php` novo dentro da pasta do site ou um executável trocado são sinais clássicos de que alguém entrou onde não devia.
 
@@ -21,7 +21,7 @@ Ferramentas como Wazuh e Tripwire fazem isso em escala. Aqui eu construí a minh
 
 <a id="como-funciona"></a>
 
-<p><img src="assets/secao-02.png" alt="Como funciona" width="100%"></p>
+<p><img src="assets/secao-02.svg" alt="Como funciona" width="100%"></p>
 
 ```mermaid
 flowchart TD
@@ -47,7 +47,7 @@ Separei a lógica em um módulo (`FIM.psm1`) e deixei o `fim.ps1` só como inter
 
 <a id="rodando"></a>
 
-<p><img src="assets/secao-03.png" alt="Rodando na sua máquina" width="100%"></p>
+<p><img src="assets/secao-03.svg" alt="Rodando na sua máquina" width="100%"></p>
 
 Funciona no Windows PowerShell 5.1, que já vem no Windows, e no PowerShell 7.
 
@@ -74,7 +74,7 @@ Install-Module Pester -MinimumVersion 5.5.0 -Scope CurrentUser
 Invoke-Pester ./tests -Output Detailed
 ```
 
-<p><img src="assets/secao-04.png" alt="Exemplo de saída" width="100%"></p>
+<p><img src="assets/secao-04.svg" alt="Exemplo de saída" width="100%"></p>
 
 Criei a baseline, depois mudei a porta no `config.ini`, apaguei o `leia-me.txt` e criei um `shell.php`, simulando o que um invasor faria num servidor web.
 
@@ -90,7 +90,7 @@ Criei a baseline, depois mudei a porta no `config.ini`, apaguei o `leia-me.txt` 
 
 <a id="aprendi"></a>
 
-<p><img src="assets/secao-05.png" alt="O que eu aprendi" width="100%"></p>
+<p><img src="assets/secao-05.svg" alt="O que eu aprendi" width="100%"></p>
 
 - Por que hash é a forma certa de detectar alteração (data de modificação pode ser falsificada)
 - Organizar PowerShell em módulo com funções exportadas
@@ -106,7 +106,7 @@ Próximos passos
 
 <a id="estudos"></a>
 
-<p><img src="assets/secao-06.png" alt="Estudei por aqui" width="100%"></p>
+<p><img src="assets/secao-06.svg" alt="Estudei por aqui" width="100%"></p>
 
 Segui essas aulas e materiais para entender e aplicar tudo que está aqui.
 
