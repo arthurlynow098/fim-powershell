@@ -1,27 +1,29 @@
-<a id="top"></a>
+<p align="center"><sub>FIM PowerShell</sub></p>
 
-<p align="center"><img src="assets/banner.svg" alt="FIM PowerShell" width="100%"></p>
+---
 
 <p align="center">
-<img alt="PowerShell" src="https://img.shields.io/badge/PowerShell-5.1%20e%207-3B82F6?style=for-the-badge&logo=powershell&logoColor=white">
-<img alt="Pester" src="https://img.shields.io/badge/testes-Pester%205-242424?style=for-the-badge">
-<a href="https://github.com/arthurlynow098/fim-powershell/actions/workflows/testes.yml"><img alt="Testes" src="https://img.shields.io/github/actions/workflow/status/arthurlynow098/fim-powershell/testes.yml?style=for-the-badge&label=testes&color=242424"></a>
-<img alt="Licença MIT" src="https://img.shields.io/badge/licen%C3%A7a-MIT-242424?style=for-the-badge">
+  <img src="assets/banner.png" alt="FIM PowerShell" width="100%">
 </p>
 
-<p align="center"><a href="#sobre">Sobre</a> &nbsp;&nbsp; <a href="#como-funciona">Como funciona</a> &nbsp;&nbsp; <a href="#rodando">Rodando</a> &nbsp;&nbsp; <a href="#aprendi">O que aprendi</a> &nbsp;&nbsp; <a href="#estudos">Estudos</a></p>
+<p align="center">
+  Monitor de integridade de arquivos (FIM) em PowerShell com baseline SHA-256 e testes Pester
+</p>
 
-<a id="sobre"></a>
+<p align="center">
+  <img alt="PowerShell" src="https://img.shields.io/badge/PowerShell-5.1%20e%207-3B82F6?style=for-the-badge&logo=powershell&logoColor=white">
+  <img alt="Pester" src="https://img.shields.io/badge/testes-Pester%205-242424?style=for-the-badge">
+  <a href="https://github.com/arthurlynow098/fim-powershell/actions/workflows/testes.yml"><img alt="Testes" src="https://img.shields.io/github/actions/workflow/status/arthurlynow098/fim-powershell/testes.yml?style=for-the-badge&label=testes&color=242424"></a>
+  <img alt="Licença MIT" src="https://img.shields.io/badge/licen%C3%A7a-MIT-242424?style=for-the-badge">
+</p>
 
-<p><img src="assets/secao-01.svg" alt="Sobre o projeto" width="100%"></p>
+## Sobre o projeto
 
 File Integrity Monitoring (FIM) é uma das primeiras coisas que aparecem quando você estuda SOC. A pergunta é simples, **algum arquivo importante mudou sem ninguém autorizar?** Um `web.config` alterado, um `.php` novo dentro da pasta do site ou um executável trocado são sinais clássicos de que alguém entrou onde não devia.
 
 Ferramentas como Wazuh e Tripwire fazem isso em escala. Aqui eu construí a minha versão em PowerShell para entender a lógica por trás, já que no trabalho eu uso Windows o dia todo.
 
-<a id="como-funciona"></a>
-
-<p><img src="assets/secao-02.svg" alt="Como funciona" width="100%"></p>
+## Como funciona
 
 ```mermaid
 flowchart TD
@@ -35,19 +37,15 @@ flowchart TD
     E & F & G --> H[Tela colorida e arquivo de log]
 ```
 
-O projeto tem três modos
+## Tecnologias
 
-| Modo | O que faz |
-|---|---|
-| `Baseline` | Tira a "foto" da pasta, com o SHA-256 de cada arquivo, e salva em JSON |
-| `Check` | Compara uma vez e sai com código 1 se tiver mudança, bom para agendar no Agendador de Tarefas |
-| `Monitor` | Fica rodando e avisa em tempo real, sem repetir o mesmo alerta a cada ciclo |
+<p>
+  <img alt="PowerShell" src="https://img.shields.io/badge/PowerShell-5391FE?style=flat-square&amp;logo=powershell&amp;logoColor=white">
+  <img alt="Pester" src="https://img.shields.io/badge/Pester-2B2B2B?style=flat-square">
+  <img alt="Windows" src="https://img.shields.io/badge/Windows-0078D4?style=flat-square&amp;logo=windows&amp;logoColor=white">
+</p>
 
-Separei a lógica em um módulo (`FIM.psm1`) e deixei o `fim.ps1` só como interface. Isso foi o que permitiu escrever testes com Pester para cada função.
-
-<a id="rodando"></a>
-
-<p><img src="assets/secao-03.svg" alt="Rodando na sua máquina" width="100%"></p>
+## Executando o código
 
 Funciona no Windows PowerShell 5.1, que já vem no Windows, e no PowerShell 7.
 
@@ -74,7 +72,7 @@ Install-Module Pester -MinimumVersion 5.5.0 -Scope CurrentUser
 Invoke-Pester ./tests -Output Detailed
 ```
 
-<p><img src="assets/secao-04.svg" alt="Exemplo de saída" width="100%"></p>
+## Exemplo
 
 Criei a baseline, depois mudei a porta no `config.ini`, apaguei o `leia-me.txt` e criei um `shell.php`, simulando o que um invasor faria num servidor web.
 
@@ -88,25 +86,7 @@ Criei a baseline, depois mudei a porta no `config.ini`, apaguei o `leia-me.txt` 
   2026-11-15T07:19:39 REMOVIDO  leia-me.txt
 ```
 
-<a id="aprendi"></a>
-
-<p><img src="assets/secao-05.svg" alt="O que eu aprendi" width="100%"></p>
-
-- Por que hash é a forma certa de detectar alteração (data de modificação pode ser falsificada)
-- Organizar PowerShell em módulo com funções exportadas
-- Escrever teste com Pester e rodar no GitHub Actions em uma máquina Windows
-- O detalhe de encoding do PowerShell 5.1, que precisa de UTF-8 com BOM para mostrar acento
-- Como o FIM aparece em normas como PCI DSS e em ferramentas como o Wazuh
-
-Próximos passos
-
-- [ ] Usar `FileSystemWatcher` para reagir na hora em vez de checar por intervalo
-- [ ] Mandar o alerta para o Visualizador de Eventos do Windows
-- [ ] Assinar a baseline para ninguém conseguir editar ela junto com o ataque
-
-<a id="estudos"></a>
-
-<p><img src="assets/secao-06.svg" alt="Estudei por aqui" width="100%"></p>
+## Estudei por aqui
 
 Segui essas aulas e materiais para entender e aplicar tudo que está aqui.
 
@@ -118,6 +98,8 @@ Segui essas aulas e materiais para entender e aplicar tudo que está aqui.
 | [MITRE ATT&CK T1565.001, Stored Data Manipulation](https://attack.mitre.org/techniques/T1565/001/) | O tipo de ataque que o FIM ajuda a pegar |
 | [Pester, Quick Start](https://pester.dev/docs/quick-start) | Estrutura de testes com Describe, It e Should |
 
-<p align="center"><sub>Parte do <a href="https://github.com/arthurlynow098">Lince Lab</a>, minha coleção de projetos de cibersegurança</sub></p>
+## Licença
 
-<p align="center"><a href="#top">Voltar ao topo</a></p>
+Distribuído sob a licença MIT. Veja o arquivo [LICENSE](LICENSE).
+
+<p align="center"><sub>A gravura do banner é a tartaruga de Mark Catesby, do século XVIII, em domínio público no <a href="https://commons.wikimedia.org/wiki/File%3AMark_Catesby%2C_The_Hawks-bill_Turtle_%28Testudo_caretta%29%2C_published_1731-1743%2C_NGA_73663.jpg">Wikimedia Commons</a>.</sub></p>
